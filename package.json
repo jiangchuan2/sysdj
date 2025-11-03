@@ -10,6 +10,8 @@
   "dependencies": {
     "mongodb": "^6.3.0",
     "axios": "^1.6.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
-
