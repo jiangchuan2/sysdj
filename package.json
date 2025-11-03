@@ -1,17 +1,7 @@
 {
-  "name": "sysdj-vercel-backend",
+  "name": "sysdj-api",
   "version": "1.0.0",
-  "description": "Vercel Serverless Backend for WeChat Mini Program",
-  "main": "index.js",
-  "scripts": {
-    "start": "echo 'No start script needed for Vercel Serverless Functions'",
-    "deploy": "echo 'Deploy via Vercel CLI or Git'"
-  },
   "dependencies": {
-    "mongodb": "^6.3.0",
-    "axios": "^1.6.5"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "mongodb": "^6.3.0"
   }
 }
