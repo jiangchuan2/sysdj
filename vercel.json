@@ -1,51 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
   "builds": [
     {
       "src": "api/**/*.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/generateQR",
-      "dest": "/api/generateQR/index.js"
-    },
-    {
-      "src": "/api/submitRegister",
-      "dest": "/api/submitRegister/index.js"
-    },
-    {
-      "src": "/api/logError",
-      "dest": "/api/logError/index.js"
-    },
-    {
-      "src": "/api/checkAdminPassword",
-      "dest": "/api/checkAdminPassword/index.js"
-    },
-    {
-      "src": "/api/getErrorLogs",
-      "dest": "/api/getErrorLogs/index.js"
-    },
-    {
-      "src": "/api/getLabList",
-      "dest": "/api/getLabList/index.js"
-    },
-    {
-      "src": "/api/addLab",
-      "dest": "/api/addLab/index.js"
-    },
-    {
-      "src": "/api/deleteLab",
-      "dest": "/api/deleteLab/index.js"
-    },
-    {
-      "src": "/api/getRegisters",
-      "dest": "/api/getRegisters/index.js"
+      "src": "/api/(.*)",
+      "dest": "/api/$1/index.js"
     }
   ]
 }
