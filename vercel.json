@@ -1,47 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/getLabList",
-      "dest": "api/getLabList/index.js"
-    },
-    {
-      "src": "/api/submitRegister",
-      "dest": "api/submitRegister/index.js"
-    },
-    {
-      "src": "/api/checkAdminPassword",
-      "dest": "api/checkAdminPassword/index.js"
-    },
-    {
-      "src": "/api/getRegisters",
-      "dest": "api/getRegisters/index.js"
-    },
-    {
-      "src": "/api/generateQR",
-      "dest": "api/generateQR/index.js"
-    },
-    {
-      "src": "/api/logError",
-      "dest": "api/logError/index.js"
-    },
-    {
-      "src": "/api/getErrorLogs",
-      "dest": "api/getErrorLogs/index.js"
-    },
-    {
-      "src": "/api/addLab",
-      "dest": "api/addLab/index.js"
-    },
-    {
-      "src": "/api/deleteLab",
-      "dest": "api/deleteLab/index.js"
-    }
-  ]
+  }
 }
