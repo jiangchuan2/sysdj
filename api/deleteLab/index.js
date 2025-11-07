@@ -14,12 +14,21 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { labName, labId } = req.body;
+    const { name, password } = req.body;
     
-    if (!labName && !labId) {
+    // 验证密码
+    const adminPassword = '9850';
+    if (password !== adminPassword) {
+      return res.status(401).json({ 
+        success: false, 
+        message: '密码错误' 
+      });
+    }
+    
+    if (!name) {
       return res.status(400).json({ 
         success: false, 
-        error: '实验室名称或 ID 不能为空' 
+        error: '实验室名称不能为空' 
       });
     }
 
@@ -27,21 +36,14 @@ module.exports = async (req, res) => {
     await client.connect();
     const db = client.db('sysdj');
     
-    let deleteQuery = {};
-    if (labId) {
-      deleteQuery = { _id: new ObjectId(labId) };
-    } else {
-      deleteQuery = { name: labName };
-    }
-    
-    const result = await db.collection('lab_list').deleteOne(deleteQuery);
+    const result = await db.collection('lab_list').deleteOne({ name: name });
     
     await client.close();
     
     if (result.deletedCount === 0) {
       return res.status(404).json({ 
         success: false, 
-        error: '实验室不存在' 
+        message: '实验室不存在' 
       });
     }
     

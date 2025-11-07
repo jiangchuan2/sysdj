@@ -14,9 +14,18 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { labName } = req.body;
+    const { name, password } = req.body;
     
-    if (!labName || !labName.trim()) {
+    // 验证密码
+    const adminPassword = '9850';
+    if (password !== adminPassword) {
+      return res.status(401).json({ 
+        success: false, 
+        message: '密码错误' 
+      });
+    }
+    
+    if (!name || !name.trim()) {
       return res.status(400).json({ 
         success: false, 
         error: '实验室名称不能为空' 
@@ -28,17 +37,17 @@ module.exports = async (req, res) => {
     const db = client.db('sysdj');
     
     // 检查是否已存在
-    const existing = await db.collection('lab_list').findOne({ name: labName });
+    const existing = await db.collection('lab_list').findOne({ name: name });
     if (existing) {
       await client.close();
       return res.status(400).json({ 
         success: false, 
-        error: '实验室已存在' 
+        message: '实验室已存在' 
       });
     }
     
     const result = await db.collection('lab_list').insertOne({ 
-      name: labName, 
+      name: name, 
       createTime: new Date() 
     });
     
