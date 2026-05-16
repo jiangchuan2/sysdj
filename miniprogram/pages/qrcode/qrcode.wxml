@@ -1,0 +1,82 @@
+<view class="container">
+  <text class="title">实验室管理</text>
+  <text class="subtitle">管理实验室信息和紧急联系方式</text>
+
+  <!-- 紧急联系方式 -->
+  <view class="emergency-section">
+    <view class="section-header">
+      <text class="section-title">🚨 紧急联系方式</text>
+    </view>
+    <view class="contact-list">
+      <view class="contact-item">
+        <text class="contact-label">实验室管理员：</text>
+        <text class="contact-value">苑老师 18380433668</text>
+      </view>
+      <view class="contact-item">
+        <text class="contact-label">安全负责人：</text>
+        <text class="contact-value">老师 13800138002</text>
+      </view>
+      <view class="contact-item">
+        <text class="contact-label">紧急报警：</text>
+        <text class="contact-value">110 / 119 / 120</text>
+      </view>
+      <view class="contact-item">
+        <text class="contact-label">学校保卫处：</text>
+        <text class="contact-value">0571-88888888</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 实验室管理 -->
+  <view class="lab-management">
+    <view class="section-header">
+      <text class="section-title">🔬 实验室管理</text>
+      <button class="add-btn" bindtap="onAddLab">添加实验室</button>
+    </view>
+
+    <scroll-view class="lab-list" scroll-y="true">
+      <view class="lab-item" wx:for="{{labList}}" wx:key="index">
+        <view class="lab-info">
+          <text class="lab-name">{{item}}</text>
+          <text class="lab-qr">二维码内容: lab={{item}}</text>
+          <view class="qr-status" wx:if="{{qrCodes[item]}}">
+            <text class="status-text">✓ 二维码已生成</text>
+          </view>
+        </view>
+        <view class="lab-actions">
+          <button class="generate-btn" bindtap="onGenerateQR" data-lab="{{item}}" disabled="{{generatingQR[item]}}">
+            {{generatingQR[item] ? '生成中...' : '生成二维码'}}
+          </button>
+          <button class="preview-btn" bindtap="onPreviewQR" data-lab="{{item}}" wx:if="{{qrCodes[item]}}">
+            预览
+          </button>
+          <button class="save-btn" bindtap="onSaveQR" data-lab="{{item}}" wx:if="{{qrCodes[item]}}">
+            保存
+          </button>
+          <button class="copy-btn" bindtap="onCopyQR" data-lab="{{item}}">
+            复制内容
+          </button>
+          <button class="delete-btn" bindtap="onDeleteLab" data-index="{{index}}" data-lab="{{item}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 使用说明 -->
+  <view class="instructions">
+    <view class="section-header">
+      <text class="section-title">📋 使用说明</text>
+    </view>
+    <view class="inst-content">
+      <text class="inst-item">1. 点击"生成二维码"按钮生成微信官方小程序码</text>
+      <text class="inst-item">2. 点击"预览"查看生成的二维码</text>
+      <text class="inst-item">3. 点击"保存"将二维码保存到手机相册</text>
+      <text class="inst-item">4. 将二维码打印并贴在对应实验室门口</text>
+      <text class="inst-item">5. 学生扫码即可自动选择实验室登记</text>
+      <text class="inst-item">6. 如有紧急情况请联系上方联系人</text>
+    </view>
+  </view>
+</view>
+

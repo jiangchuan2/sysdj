@@ -1,0 +1,238 @@
+.container {
+    padding: 40rpx;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+  }
+  
+  .title {
+    font-size: 48rpx;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    display: block;
+    margin-bottom: 20rpx;
+  }
+  
+  .subtitle {
+    font-size: 28rpx;
+    text-align: center;
+    color: #666;
+    display: block;
+    margin-bottom: 40rpx;
+  }
+  
+  .emergency-section, .lab-management, .instructions {
+    background-color: #fff;
+    border-radius: 12rpx;
+    padding: 30rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30rpx;
+  }
+  
+  .section-title {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-btn {
+    background-color: #07c160;
+    color: #fff;
+    font-size: 26rpx;
+    padding: 12rpx 24rpx;
+    border-radius: 6rpx;
+  }
+  
+  /* 紧急联系方式样式 */
+  .contact-list {
+    background-color: #fff3cd;
+    border: 2rpx solid #ffeaa7;
+    border-radius: 8rpx;
+    padding: 20rpx;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15rpx;
+    padding: 15rpx;
+    background-color: #fff;
+    border-radius: 6rpx;
+    border-left: 4rpx solid #ff6b6b;
+  }
+  
+  .contact-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .contact-label {
+    font-size: 28rpx;
+    color: #666;
+    min-width: 200rpx;
+  }
+  
+  .contact-value {
+    font-size: 28rpx;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* 实验室管理样式 */
+  .lab-list {
+    max-height: 800rpx;
+  }
+  
+  .lab-item {
+    background-color: #f8f9fa;
+    border-radius: 8rpx;
+    padding: 25rpx;
+    margin-bottom: 15rpx;
+    border-left: 4rpx solid #007bff;
+  }
+  
+  .lab-info {
+    margin-bottom: 20rpx;
+  }
+  
+  .lab-name {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 10rpx;
+  }
+  
+  .lab-qr {
+    font-size: 24rpx;
+    color: #666;
+    background-color: #e9ecef;
+    padding: 8rpx 12rpx;
+    border-radius: 4rpx;
+    word-break: break-all;
+    display: block;
+    margin-bottom: 10rpx;
+  }
+  
+  .qr-status {
+    display: inline-block;
+    background-color: #d4edda;
+    padding: 8rpx 12rpx;
+    border-radius: 4rpx;
+    margin-top: 5rpx;
+  }
+  
+  .status-text {
+    font-size: 22rpx;
+    color: #155724;
+    font-weight: bold;
+  }
+  
+  .lab-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10rpx;
+  }
+  
+  .lab-actions button {
+    flex: 0 0 calc(50% - 5rpx);
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 24rpx;
+    padding: 12rpx;
+    border-radius: 6rpx;
+    border: none;
+  }
+  
+  .generate-btn {
+    background-color: #2196F3;
+    color: #fff;
+  }
+  
+  .generate-btn:active {
+    background-color: #0b7dda;
+  }
+  
+  .generate-btn[disabled] {
+    background-color: #ccc;
+    color: #666;
+  }
+  
+  .preview-btn {
+    background-color: #FF9800;
+    color: #fff;
+  }
+  
+  .preview-btn:active {
+    background-color: #e68900;
+  }
+  
+  .save-btn {
+    background-color: #9C27B0;
+    color: #fff;
+  }
+  
+  .save-btn:active {
+    background-color: #7b1fa2;
+  }
+  
+  .copy-btn {
+    background-color: #17a2b8;
+    color: #fff;
+    font-size: 26rpx;
+    padding: 12rpx;
+    border-radius: 6rpx;
+  }
+  
+  .copy-btn:active {
+    background-color: #138496;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 26rpx;
+    padding: 12rpx 20rpx;
+    border-radius: 6rpx;
+  }
+  
+  .delete-btn:active {
+    background-color: #c82333;
+  }
+  
+  /* 使用说明样式 */
+  .inst-content {
+    background-color: #f8f9fa;
+    border-radius: 8rpx;
+    padding: 20rpx;
+  }
+  
+  .inst-item {
+    font-size: 28rpx;
+    color: #666;
+    display: block;
+    margin-bottom: 15rpx;
+    line-height: 1.5;
+    padding-left: 20rpx;
+    position: relative;
+  }
+  
+  .inst-item:before {
+    content: "•";
+    color: #007bff;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+  
+  .inst-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  

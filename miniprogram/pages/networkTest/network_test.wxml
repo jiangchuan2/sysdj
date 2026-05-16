@@ -1,0 +1,44 @@
+<!--网络诊断测试页面 - pages/networkTest/networkTest.wxml-->
+
+<view class="container">
+  <view class="header">
+    <text class="title">网络连接诊断</text>
+  </view>
+
+  <view class="content">
+    <button 
+      class="test-button" 
+      bindtap="runTests"
+      disabled="{{testing}}"
+    >
+      {{testing ? '测试中...' : '开始测试'}}
+    </button>
+
+    <view class="results">
+      <view 
+        wx:for="{{testResults}}" 
+        wx:key="index"
+        class="result-item"
+      >
+        <view class="result-name">{{item.name}}</view>
+        <view class="result-status">{{item.status}}</view>
+        <view class="result-detail" wx:if="{{item.statusCode}}">
+          状态码: {{item.statusCode}}
+        </view>
+        <view class="result-detail" wx:if="{{item.error}}">
+          错误: {{item.error}}
+        </view>
+        <view class="result-time">{{item.time}}</view>
+      </view>
+    </view>
+
+    <view class="tips">
+      <text class="tips-title">诊断说明：</text>
+      <text class="tips-content">
+        • 如果 Vercel API 失败，但 GitHub API 成功，说明是 Vercel 的问题
+        • 如果都失败，说明是小程序的网络环境问题
+        • 请确保已在微信小程序后台添加域名白名单
+      </text>
+    </view>
+  </view>
+</view>

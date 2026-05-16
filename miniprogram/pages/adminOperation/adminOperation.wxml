@@ -1,0 +1,20 @@
+<view class="container">
+  <text class="title">管理员操作界面</text>
+
+  <block wx:if="{{!loggedIn}}">
+    <view class="password-input-section">
+      <input class="password-input" type="password" placeholder="请输入管理员密码" bindinput="onPasswordInput" />
+      <button class="login-button" bindtap="onLogin">登录</button>
+      <text wx:if="{{error}}" class="error-message">{{error}}</text>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="section">
+      <text class="section-title">功能列表</text>
+      <button class="action-button" bindtap="navigateToErrorLogs">查看错误日志</button>
+      <button class="action-button" bindtap="navigateToReservationManagement">管理实验室预约</button>
+      <button class="action-button" bindtap="navigateToUserManagement">用户管理</button>
+    </view>
+  </block>
+</view>

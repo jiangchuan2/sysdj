@@ -1,0 +1,91 @@
+<view class="container">
+  <text class="title">错误日志</text>
+  <scroll-view scroll-y="true" class="log-list">
+    <block wx:if="{{errorLogs.length > 0}}">
+      <view wx:for="{{errorLogs}}" wx:key="_id" class="log-item">
+        <text class="log-type">类型: {{item.type}}</text>
+        <text class="log-message">消息: {{item.message}}</text>
+        <text class="log-error">错误: {{item.error}}</text>
+        <text class="log-stack">堆栈: {{item.stack}}</text>
+        <text class="log-time">时间: {{item.timestamp}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <text class="no-logs">暂无错误日志</text>
+    </block>
+  </scroll-view>
+  <button class="refresh-button" bindtap="loadErrorLogs">刷新日志</button>
+</view>
+
+<style>
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Full height */
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.log-list {
+  width: 100%;
+  flex: 1; /* Take available space */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.log-item {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.log-type,
+.log-message,
+.log-error,
+.log-stack,
+.log-time {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  word-break: break-all; /* Ensure long text breaks */
+}
+
+.log-type {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.no-logs {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+.refresh-button {
+  width: 80%;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.refresh-button:active {
+  background-color: #218838;
+}
+</style>

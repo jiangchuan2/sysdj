@@ -1,0 +1,50 @@
+<view class="container">
+  <text class="title">实验室使用登记</text>
+  
+  <!-- 实验室选择 -->
+  <view class="form-item">
+    <text class="label">选择实验室</text>
+    <picker bindchange="onLabChange" value="{{labIndex}}" range="{{labs}}">
+      <view class="picker">
+        {{labIndex >= 0 ? labs[labIndex] : '请选择实验室'}}
+      </view>
+    </picker>
+  </view>
+
+  <!-- 学号输入 -->
+  <view class="form-item">
+    <text class="label">学号</text>
+    <input
+      class="input-field"
+      placeholder="请输入学号"
+      bindinput="onInputStudentId"
+      value="{{studentId}}"
+      type="number"
+    />
+  </view>
+
+  <!-- 姓名输入 -->
+  <view class="form-item">
+    <text class="label">姓名</text>
+    <input
+      class="input-field"
+      placeholder="请输入姓名"
+      bindinput="onInputName"
+      value="{{name}}"
+    />
+  </view>
+
+  <!-- 电话输入 -->
+  <view class="form-item">
+    <text class="label">电话</text>
+    <input
+      class="input-field"
+      placeholder="请输入电话号码"
+      bindinput="onInputPhone"
+      value="{{phone}}"
+      type="number"
+    />
+  </view>
+
+  <button class="submit-button" bindtap="onSubmit">提交登记</button>
+</view>
