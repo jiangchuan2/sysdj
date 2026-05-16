@@ -1,46 +1,18 @@
 Page({
-  data: {},
-
-  onLoad: function () {
-    console.log('Index page loaded');
-  },
-
-  onScanCode: function () {
+  onScanCode() {
     wx.scanCode({
-      success: (res) => {
-        console.log('Scan result:', res);
+      success: res => {
         const result = res.result;
-        if (result.includes('lab=')) {
-          const labName = result.replace('lab=', '');
-          wx.navigateTo({ url: `/pages/register/register?lab=${encodeURIComponent(labName)}` });
-        } else {
-          wx.showModal({
-            title: '确认实验室',
-            content: `扫描到内容：${result}\n是否将此作为实验室名称？`,
-            success: (modalRes) => {
-              if (modalRes.confirm) {
-                wx.navigateTo({ url: `/pages/register/register?lab=${encodeURIComponent(result)}` });
-              }
-            }
-          });
-        }
+        const labName = result.includes('lab=') ? result.split('lab=')[1] : result;
+        wx.navigateTo({ url: `/pages/register/register?lab=${encodeURIComponent(labName)}` });
       },
-      fail: (err) => {
-        console.error('Scan failed:', err);
-        wx.showToast({ title: '扫描失败，请重试', icon: 'none' });
-      }
+      fail: () => wx.showToast({ title: '扫描失败', icon: 'none' })
     });
   },
-
-  onManualRegister: function () {
+  onManualRegister() {
     wx.navigateTo({ url: '/pages/register/register' });
   },
-
-  onGoToQRCode: function () {
-    wx.navigateTo({ url: '/pages/qrcode/qrcode' });
-  },
-
-  onGoToAdmin: function () {
+  onGoToAdmin() {
     wx.navigateTo({ url: '/pages/admin/admin' });
   }
 });

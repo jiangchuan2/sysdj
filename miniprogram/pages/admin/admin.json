@@ -1,4 +1,1 @@
-{
-    "navigationBarTitleText": "登记管理",
-    "enablePullDownRefresh": true
-  }
+{ "navigationBarTitleText": "管理后台", "usingComponents": {} }

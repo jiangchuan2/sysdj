@@ -7,160 +7,63 @@ Page({
     name: '',
     studentId: '',
     phone: '',
-    loading: false,
-    fromScan: false,
-    scannedLab: ''
+    loading: false
   },
 
-  onLoad: function (options) {
-    console.log('register onLoad, options:', options);
-    
+  onLoad(options) {
+    this.loadLabs();
     if (options.lab) {
       const labName = decodeURIComponent(options.lab);
-      console.log('从扫码进入，实验室:', labName);
-      this.setData({
-        scannedLab: labName,
-        fromScan: true
-      });
+      const idx = this.data.labs.indexOf(labName);
+      if (idx >= 0) this.setData({ labIndex: idx });
     }
-    
-    this.loadLabList();
   },
 
-  onShow: function () {
-    console.log('register onShow');
-    this.loadLabList();
-  },
-
-  loadLabList: async function () {
-    console.log('开始加载实验室列表...');
-    wx.showLoading({ title: '加载实验室中...' });
-
+  async loadLabs() {
     try {
       const labs = await util.getLabList();
-      console.log('处理后的实验室列表:', labs);
-      
-      this.setData({ labs: labs });
-      wx.hideLoading();
-      
-      if (this.data.fromScan && this.data.scannedLab) {
-        const index = labs.indexOf(this.data.scannedLab);
-        console.log('扫码实验室索引:', index);
-        if (index >= 0) {
-          this.setData({ labIndex: index });
-        } else {
-          wx.showToast({ 
-            title: '实验室不存在，请重新选择', 
-            icon: 'none' 
-          });
-          this.setData({ scannedLab: '', fromScan: false });
-        }
+      this.setData({ labs });
+      // If we had a scanned lab, set it now
+      if (this.data.labIndex === -1 && this.options && this.options.lab) {
+        const labName = decodeURIComponent(this.options.lab);
+        const idx = labs.indexOf(labName);
+        if (idx >= 0) this.setData({ labIndex: idx });
       }
-    } catch (err) {
-      wx.hideLoading();
-      console.error('加载实验室列表失败:', err);
-      wx.showToast({ title: '网络连接失败', icon: 'error' });
+    } catch (e) {
+      wx.showToast({ title: '加载实验室失败', icon: 'none' });
     }
   },
 
-  onLabChange: function (e) {
-    const index = parseInt(e.detail.value);
-    console.log('选择实验室索引:', index, '实验室名称:', this.data.labs[index]);
-    this.setData({ 
-      labIndex: index,
-      fromScan: false,
-      scannedLab: ''
-    });
+  onLabChange(e) {
+    this.setData({ labIndex: parseInt(e.detail.value) });
   },
 
-  onInputName: function (e) {
-    this.setData({ name: e.detail.value });
+  onInput(e) {
+    const field = e.currentTarget.dataset.field;
+    this.setData({ [field]: e.detail.value });
   },
 
-  onInputStudentId: function (e) {
-    this.setData({ studentId: e.detail.value });
-  },
-
-  onInputPhone: function (e) {
-    this.setData({ phone: e.detail.value });
-  },
-
-  onSubmit: async function () {
-    const { labIndex, labs, name, studentId, phone, fromScan } = this.data;
-
-    if (labIndex < 0) {
-      wx.showToast({ title: '请选择实验室', icon: 'none' });
-      return;
-    }
-    
-    const selectedLab = labs[labIndex];
-    
-    if (!name) {
-      wx.showToast({ title: '请输入姓名', icon: 'none' });
-      return;
-    }
-    if (!studentId) {
-      wx.showToast({ title: '请输入学号', icon: 'none' });
-      return;
-    }
-    if (!phone) {
-      wx.showToast({ title: '请输入电话', icon: 'none' });
-      return;
-    }
+  async onSubmit() {
+    const { labIndex, labs, name, studentId, phone } = this.data;
+    if (labIndex < 0) return wx.showToast({ title: '请选择实验室', icon: 'none' });
+    if (!name) return wx.showToast({ title: '请输入姓名', icon: 'none' });
+    if (!studentId) return wx.showToast({ title: '请输入学号', icon: 'none' });
+    if (!phone) return wx.showToast({ title: '请输入电话', icon: 'none' });
 
     this.setData({ loading: true });
-    wx.showLoading({ title: '提交中...' });
-
-    const now = new Date();
-    const date = now.toISOString().split('T')[0];
-    const time = now.toLocaleTimeString();
-
-    console.log('提交数据:', {
-      lab: selectedLab,
-      name: name,
-      student_id: studentId,
-      phone: phone,
-      date: date,
-      time: time,
-      from_scan: fromScan
-    });
-
     try {
       await util.submitRegister({
-        lab: selectedLab,
-        name: name,
-        student_id: studentId,
-        phone: phone,
-        date: date,
-        time: time,
-        from_scan: fromScan
+        lab: labs[labIndex],
+        name,
+        studentId,
+        phone,
+        fromScan: !!this.options.lab
       });
-
-      wx.hideLoading();
-      this.setData({ loading: false });
-      
-      wx.showToast({
-        title: '登记成功',
-        icon: 'success'
-      });
-
-      this.setData({
-        name: '',
-        studentId: '',
-        phone: '',
-        labIndex: -1,
-        fromScan: false,
-        scannedLab: ''
-      });
-
-      setTimeout(() => {
-        wx.navigateBack();
-      }, 2000);
-    } catch (err) {
-      wx.hideLoading();
-      this.setData({ loading: false });
-      console.error('提交失败:', err);
-      wx.showToast({ title: '提交失败', icon: 'error' });
+      wx.showToast({ title: '登记成功', icon: 'success' });
+      setTimeout(() => wx.navigateBack(), 1500);
+    } catch (e) {
+      wx.showToast({ title: '提交失败', icon: 'none' });
     }
+    this.setData({ loading: false });
   }
 });

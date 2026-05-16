@@ -2,14 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/register/register",
-    "pages/admin/admin",
-    "pages/qrcode/qrcode"
+    "pages/admin/admin"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#2d8c3f",
+    "navigationBarBackgroundColor": "#4F46E5",
     "navigationBarTitleText": "实验室登记",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
